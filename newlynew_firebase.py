@@ -4,12 +4,10 @@ import sqlite3
 import firebase_admin
 from firebase_admin import credentials, firestore
 
-
 # Run this part only once after running the website
 if not firebase_admin._apps:
     cred = credentials.Certificate('sql-learn-fa3e6-0f8947c48904.json') 
     default_app = firebase_admin.initialize_app(cred)
-
 
 # Initialize Firestore client
 db = firestore.client()
@@ -26,7 +24,7 @@ def get_all_documents(collection_name):
         for doc in docs:
             # print(f'Document ID: {doc.id} => Document Data: {doc.to_dict().get('Name')}')
             study_modules[str(doc.id)+": "+doc.to_dict().get('Name')] = doc.to_dict().get('Content')
-        print(study_modules)
+        # print(study_modules)
             
     except Exception as e:
         print('Error getting documents:', e)

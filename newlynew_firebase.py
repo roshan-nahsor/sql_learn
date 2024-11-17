@@ -4,9 +4,17 @@ import sqlite3
 import firebase_admin
 from firebase_admin import credentials, firestore
 
+import json
+key_dict = json.loads(st.secrets["textkey"])
+# creds = service_account.Credentials.from_service_account_info(key_dict)
+# db = firestore.Client(credentials=creds, project="streamlit-reddit")
+
 # Run this part only once after running the website
 if not firebase_admin._apps:
-    cred = credentials.Certificate('sql-learn-fa3e6-0f8947c48904.json') 
+    # cred = credentials.Certificate('sql-learn-fa3e6-0f8947c48904.json') 
+    # Create a credentials dictionary using the secrets
+    # cred = credentials.Certificate(dict(fb_credentials)) 
+    cred = credentials.Certificate(key_dict) 
     default_app = firebase_admin.initialize_app(cred)
 
 # Initialize Firestore client
